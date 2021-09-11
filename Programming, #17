@@ -1,21 +1,22 @@
+// Найти площадь кольца, внутренний радиус которого равен 20, а внешний - заданному числу R(>20)
 #define _USE_MATH_DEFINES
 #include <stdio.h>
 #include <math.h>
 
 int main()
 {
-    double R, r;
+    double R, r;                                                //Задаём тип double переменным
 
-    r = 20.0;
+    r = 20.0;                                                   //Внутренний радиус кольца
 
-    do
+    do                                                          //Цикл с постусловием, то есть команда сработает, если выполнится условие ниже
     {
-     printf("print outer radius R = ");
-     scanf("%lf", &R);
-     if (R < r) printf("R must be large than r!\r\n");
-    } while (R < r);
+     printf("print outer radius R = ");                         //Задаётся внешний радиус
+     scanf("%lf", &R);                                          //
+     if (R < r) printf("R must be large than r!\r\n");          //Условные оператор if (Если Внешний радиус меньше внутреннего, пишется предупреждение об ошибке)
+    } while (R < r);                                            //С 13 по 17 строку выполняется цикл while
     
-    double S = ((pow (R, 2.0)) - (pow (r, 2.0))) * M_PI;
-     printf("S = %lf\r\n", S);
-    return 0;
+    double S = ((pow (R, 2.0)) - (pow (r, 2.0))) * M_PI;        //Формула вычисления площади кольца S = Pi(R^2 - r^2)
+     printf("S = %lf\r\n", S);                                  //Вывод площади кольца на экран
+    return 0;                                                  
 }

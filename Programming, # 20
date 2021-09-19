@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <math.h>
 
-//    S(n) = (n+2)*a + d*Σ(k=1;n+1)k =
-//    (n+2)·a + 0,5·d·(n+2)·(n+1) = (n+2)·[a+0,5·d·(n+1)]
-int main() 
+#define _USE_MATH_DEFINES
+
+int main()
 {
-    double a, d, n; 
+	double a, n, d;
     printf("a = ");                                                                            //printf = выводит значение на экран
     scanf("\n%lf", &a);                                                                        //scanf = предлагает пользователю ввести значение переменной
     printf("d = ");                                                                            //&a = ссылаться на переменную a
     scanf("\n%lf", &d);
     printf("n = ");
     scanf("\n%lf", &n); 
-    printf("%f\n", (n+2) * (a+0.5*d*(n+1)));                                                   //Конечная формула вычисления
+	printf("Arithmetic progression = %f\n", a*((2*n + (n-1)*d)/(2)));
     return 0;
-     }
+}

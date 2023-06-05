@@ -1,0 +1,4 @@
+﻿  1.cpp
+C:\Users\lxve_every1\source\repos\1\1\1.cpp(57,26): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  LINK : не найден или не выполнена сборка C:\Users\lxve_every1\source\repos\Tech proga\Debug\1.exe при последней инкрементной компоновке; выполняется полная компоновка
+  1.vcxproj -> C:\Users\lxve_every1\source\repos\Tech proga\Debug\1.exe

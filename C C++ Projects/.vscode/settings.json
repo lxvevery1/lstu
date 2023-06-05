@@ -1,0 +1,20 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "ostream": "cpp",
+        "xstring": "cpp",
+        "iosfwd": "cpp",
+        "sstream": "cpp",
+        "iomanip": "cpp",
+        "iostream": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xutility": "cpp",
+        "vector": "cpp",
+        "utility": "cpp",
+        "streambuf": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "xtree": "cpp"
+    }
+}

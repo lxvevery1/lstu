@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\lxve_every1\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(7,10): error C2039: "cout": не является членом "std".
+C:\Users\lxve_every1\source\repos\ConsoleApplication1\ConsoleApplication1\predefined C++ types (compiler internal)(340): message : см. объявление "std"
+C:\Users\lxve_every1\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(7,15): error C2065: cout: необъявленный идентификатор

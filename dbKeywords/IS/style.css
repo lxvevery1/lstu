@@ -1,0 +1,103 @@
+body{
+    background-color: #cbcbcb;
+    font-family: arial;
+    flex: 1 1 auto;
+}
+
+.article-container {
+    width: 800px;
+    background-color: #ffffff;
+    padding: 15px;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.words-container {
+    width: 190px;
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+.words-list {
+    background-color: #dddddd;
+    border-radius: 5px;
+    margin: 20px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.home-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #d5d5d5;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+.top-words-list {
+    background-color: #dddddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding-left:10px; 
+}
+
+.keyword-name {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.keyword-list {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.article-box {
+    padding-bottom: 20px;
+    flex: 1 1 auto;
+}
+
+.article-box p.type {
+    font-style: italic;
+    color: #d8ff64;
+}
+
+.text-background {
+    background-color: #fbfbfb;
+    padding: 10px;
+}
+  
+.example-box {
+    background-color: #f0f0f0;
+    padding-left: 10px;
+    padding-top: 1px;
+    border-radius: 10px;
+}
+
+input{
+    padding: 0px 20px;
+    width: 300px;
+    height: 40px;
+    font-size: 22px;
+    flex: 1 1 auto;
+}
+
+button{
+    width: 200px;
+    height: 44px;
+    font-size: 22px;
+    flex: 1 1 auto;
+}
+
+pre{
+    overflow: auto;
+}
+
+.keyword-name{
+    overflow: auto;
+}

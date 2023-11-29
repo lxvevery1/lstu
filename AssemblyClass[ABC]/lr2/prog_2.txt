@@ -1,0 +1,80 @@
+model small
+data_in segment
+    input db 83
+data_in ends
+data_out segment
+    res1 db 0
+data_out ends
+stack segment
+    dw 100 dup(0) ; Stack definition
+stack ends
+code segment
+    res2 db 0
+    assume DS:data_out, ES:data_in, CS:code, SS:stack
+
+near_conversion proc
+    push ax ; сохраняем регистр ax в стеке
+
+    mov ax, data_in
+    mov es, ax
+    mov ax, data_out
+    mov ds, ax
+
+    mov al, [input] ; используем косвенную адресацию для чтения значения из data_in
+    xor ah, ah
+    mov bl, 10
+    div bl
+    mov dl, al
+    mov al, ah
+    shl dl, 4
+    or al, dl
+    mov res1, al
+    mov res2, al
+
+    pop ax ; восстанавливаем регистр ax из стека
+    ret ; возвращаемся из подпрограммы
+near_conversion endp
+
+far_conversion proc far
+    push ax ; сохраняем регистр ax в стеке
+
+    mov ax, data_in
+    mov es, ax
+    mov ax, data_out
+    mov ds, ax
+
+    mov al, [input] ; используем косвенную адресацию для чтения значения из data_in
+    xor ah, ah
+    mov bl, 10
+    div bl
+    mov dl, al
+    mov al, ah
+    shl dl, 4
+    or al, dl
+    mov res1, al
+    mov res2, al
+
+    pop ax ; восстанавливаем регистр ax из стека
+    retf ; возвращаемся из подпрограммы (far return)
+far_conversion endp
+
+start:
+    ; стек будет инициализирован операционной системой MS-DOS перед запуском программы
+
+    lea si, input ; загружаем адрес input в регистр si
+    push si ; помещаем адрес input в стек
+
+    call near_conversion
+
+    pop si ; восстанавливаем адрес input из стека
+
+    lea si, input ; загружаем адрес input в регистр si
+    push si ; помещаем адрес input в стек
+
+    call far_conversion
+
+    mov ah, 4Ch
+    int 21h
+
+code ends
+end start

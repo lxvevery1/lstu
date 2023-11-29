@@ -1,0 +1,31 @@
+model small 
+data_in segment 
+ input db 83 
+data_in ends 
+data_out segment
+ res1 db 0
+data_out ends
+code segment 
+ res2 db 0 
+ assume DS:data, ES:code, CS:code 
+
+start: 
+ mov ax, data_in
+ mov es, ax 
+ mov ax, data_out 
+ mov ds, ax 
+ mov al, ds:[input] 
+ xor ah, ah 
+ mov bl, 10 
+ div bl 
+ mov dl, al 
+ mov al, ah 
+ shl dl, 4 
+ or al, dl 
+ mov ds:[res1], al 
+ mov es:[res2], al 
+ mov ax, 0 
+ mov al, ds:[res1] 
+ mov ah, 4Ch 
+ int 21h 
+end start

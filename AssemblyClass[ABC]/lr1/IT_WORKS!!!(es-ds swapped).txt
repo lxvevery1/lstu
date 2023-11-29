@@ -1,0 +1,40 @@
+.model small
+
+data segment
+    input db 83
+data ends
+
+result segment
+    res db 0
+result ends
+
+code segment
+    assume ES:data, DS:result, CS:code
+
+start:
+    mov ax, data
+    mov es, ax
+
+    mov ax, result
+    mov ds, ax
+
+    mov al, es:[input]  ; Загрузить исходное значение из es:data
+    xor ah, ah           ; Очистить регистр AH
+    mov bl, 10
+    div bl              ; AL = AL / 10 (десяток), AH = AL % 10 (остаток)
+
+    mov dl, al          ; Копировать десяток в DL
+    mov al, ah          ; Переместить остаток в AL
+
+    shl dl, 4           ; Сдвиг десятка влево на 4 бита
+    or al, dl           ; Соединить десяток и остаток в AL
+
+    mov ds:[res], al    ; Сохранить результат в ds:result
+
+    mov ax, 0           ; Обнулить регистр AX
+    mov al, ds:[res]    ; Загрузить результат из ds:result в AL
+
+    mov ah, 4Ch
+    int 21h
+code ends
+end

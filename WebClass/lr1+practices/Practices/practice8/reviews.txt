@@ -1,0 +1,42 @@
+Name: john
+Email: john_doe@gmail.com
+Rating: 5
+Review: Джонни, КРАСАВЧИК!!!
+Photo Path: uploads/WIN_20221111_19_08_29_Pro.jpg
+
+Name: Джон
+Email: john_doe@gmail.com
+Rating: 1
+Review: Очень плохо!
+Photo Path: uploads/cat.jpg
+
+Name: Валера
+Email: Valera@gmail.com
+Rating: 3
+Review: Пойдет!
+Photo Path: uploads/3.jpg
+
+Name: Марина
+Email: marina@gmail.com
+Rating: 4
+Review: Марина, хорошо!
+Photo Path: uploads/7.png
+
+Name: Александр
+Email: alex213@gmail.com
+Rating: 5
+Review: Алекс, хорошо!
+Photo Path: uploads/9.jpg
+
+Name: Freak
+Email: freak@gmail.com
+Rating: 2
+Review: Фрик! Это уже четвертая двойка по информатике за семестр! Походишь ко мне на дополнительные занятия каждую среду после пяти!
+Photo Path: uploads/cat.jpg
+
+Name: jimmy
+Email: jimmy@mail.ru
+Rating: 5
+Review: Well done, jimmy
+Photo Path: uploads/kiskiskis.jpg
+

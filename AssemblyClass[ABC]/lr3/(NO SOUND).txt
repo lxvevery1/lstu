@@ -2,6 +2,7 @@
 
 data_in segment
     input db 4 dup(0) ; Массив для ввода данных
+    output db 8 dup(0) ; Массив, содержащий отдельные символы для каждого числа
 data_in ends
 
 data_out segment
@@ -20,7 +21,7 @@ code segment
         mov ax, data_in
         mov es, ax
         mov ax, data_out
-        mov ds, ax 
+        mov ds, ax
 
         mov si, 0 ; Initialize index for array traversal
 
@@ -28,7 +29,9 @@ code segment
         ; Ввод символа с клавиатуры
         mov ah, 01h
         int 21h
-        sub al, '0' ; magic
+        sub al, '0' ; Convert ASCII to integer
+
+        ; Store the modified value in the input array
         mov input[si], al
 
         inc si
@@ -51,8 +54,22 @@ code segment
 
         mov res2, al ; Store the result in res2
 
-        push ax ; push 83, 99 to stack
+        ; Print the input array for verification
+        mov si, 0
+        print_input:
+            mov dl, input[si]
+            add dl, '0' ; Convert back to ASCII
+            mov ah, 02h ; DOS function to print character
+            int 21h
 
+            inc si
+            cmp si, 4
+            jl print_input
+
+        ; Push the modified values (83, 99) to the stack
+        push ax
+
+        ; Call the far subroutine for further processing
         call far ptr far_conversion
 
         ret ; Return from subroutine

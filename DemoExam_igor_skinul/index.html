@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DemoExam</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left-block">
+            <div class="case-block">
+                
+                    <img class="beauty-rotate" src="img/Logo.svg">
+                
+                <p class="case_1">Вариант 1</p>
+            </div>
+            <div class="case-two-block">
+                <p class="up-clothe">Верхняя одежда</p>
+                <p class="trousers">Брюки</p>
+                <p class="accessories">Аксессуары</p>
+            </div>
+        </div>
+
+        <div class="header-right-block">
+            <img src="/img/Frame.svg" id="loginButton">
+            <img src="/img/basket.svg">
+        </div>
+
+        <div class="popup" id="loginPopup">
+          <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <!-- Your login/registration form goes here -->
+            <h2>Login or Register</h2>
+            <form>
+              <!-- Your form fields go here -->
+              <button type="submit">Login</button>
+            </form>
+            <p>Forgot your password? <a href="#">Reset here</a></p>
+          </div>
+        </div>
+    </header>
+
+    <div class="loader" id="loader">
+    </div>
+
+    <main>
+        <div class="main-left-block">
+            <img src="/img/settings-04.svg">
+            <div class="dropdown">
+                <button class="btn" style="border-left:1px solid navy">
+                  <p class="fa fa-caret-down">Фильтры</p>
+                </button>
+                <div class="dropdown-content">
+                  <div class="dropdown-level">
+                    <input type="checkbox" id="radiobutton_1">
+                    <label for="radiobutton_1">Акне Студия</label>
+                  </div>
+                  <div class="dropdown-level">
+                    <input type="checkbox" id="radiobutton_2">
+                    <label for="radiobutton_2">АМИ Париж</label>
+                  </div>
+                  <div class="dropdown-level">
+                    <input type="checkbox" id="radiobutton_3">
+                    <label for="radiobutton_3">Вквадрате</label>
+                  </div>
+                  <div class="dropdown-level">
+                    <input type="checkbox" id="radiobutton_4">
+                    <label for="radiobutton_4">Каменный остров</label>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="main-right-block">
+            <select name="choose" id="choose-select">
+                <div class="dropdown">
+                  <button class="button">Sorting Options</button>
+                  <div class="dropdown-content" id="choose-select">
+                    <option class="text-option1" value="all">По умолчанию</option>
+                    <option class="text-option1" value="cheap-first">Сначала доступные</option>
+                    <option class="text-option1" value="expensive-first">Сначала дорогие</option>
+                  </div>
+                </div>
+            </select>
+        </div>
+
+
+    </main>
+
+
+    <div id="cardBlock" class="main-card-block">
+        <div id="out" class="card-block">
+        </div>
+    </div>
+
+    <footer>
+        <p class="case_2">© Вариант 1. Станиславчук Сергей, группа АС-21-1</p>
+    </footer>
+
+</body>
+<script src="script.js"></script>
+
+</html>

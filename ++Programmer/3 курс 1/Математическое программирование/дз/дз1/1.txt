@@ -1,0 +1,33 @@
+import math
+
+def f(x):
+    return x * math.sqrt(1 - x**2)
+
+def svenn_method(f, x0, h=0.01):
+    if f(x0) < f(x0 + h):
+        h = -h
+    x1 = x0 + h
+    h = h * 2
+    while f(x0) > f(x1):
+        x0 = x1
+        x1 = x1 + h
+    return x0, x1
+
+def steffensen_method(f, x0, tol=1e-6, max_iter=100):
+    for i in range(max_iter):
+        x1 = f(x0)
+        x2 = f(x1)
+        if abs(x2 - x0) < tol:
+            return x2
+        x0 = x0 - (x1 - x0)**2 / (x2 - 2 * x1 + x0)
+
+    raise ValueError("Steffensen method did not converge")
+
+x_start, x_end = svenn_method(f, 0)  # Начальный интервал для левой стационарной точки
+stationary_point_left = steffensen_method(f, (x_start + x_end) / 2)
+
+x_start, x_end = svenn_method(f, 0)  # Начальный интервал для правой стационарной точки
+stationary_point_right = steffensen_method(f, (x_start + x_end) / 2)
+
+print("Левая стационарная точка:", stationary_point_left)
+print("Правая стационарная точка:", stationary_point_right)

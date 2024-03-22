@@ -1,0 +1,290 @@
+body{
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    margin: 38.5px 200px;
+}
+
+.content{
+    align-items: center;
+    
+    margin-top: 65px; /* centered */
+}
+
+.centered-text {
+    display: inline-block; /* Делаем элементы блочными для центрирования */
+    margin: 0 10px; /* Добавляем отступы между элементами */
+}
+
+.header-big-icon{
+    margin-left: 1000px;
+    margin-top: -450px;
+}
+.header-button{
+    background-color: #e989ae;
+    padding: 20px 50px;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+
+    transition: background-color 0.3s linear;
+}
+
+.header-btn{
+    margin-top: 45px;
+}
+
+.header-button:hover{
+    background-color: #794482;
+}
+
+.header-down{
+    margin-top: 100px;
+    margin-left: 300px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 120px;
+    max-width: 1000px;
+}
+
+.header-line{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 490px;
+}
+
+.header-logo{
+    margin-left: 65px;
+}
+
+.header-title{
+    color: var(--1, #2E363E);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 60px;
+    max-width: 600px;
+    margin-top: -60px;
+}
+
+.header-text{
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    line-height: 40px;
+    max-width: 1000px;
+}
+
+.header-subtitle{
+    color: var(--2, #434B53);
+    /* ����� / 21px, Regular */
+    font-family: Montserrat;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 143%; /* 30.03px */
+    letter-spacing: -0.2px;
+    margin-top: 24px;
+}
+.header-uptitle{
+    color: var(--2, #e989ae);
+    font-family: Montserrat;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 143%; /* 30.03px */
+    letter-spacing: -0.2px;
+
+    margin-top: 24px;
+}
+.my-skills{
+    margin-top: 100px;
+    margin-left: 411px;
+}
+
+.my-skills-content{
+    color: #000;
+
+    /* Текст / 24px, Regular */
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 143%; /* 34.32px */
+
+    display: flex;
+    width: 435px;
+    height: 58px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 73px;
+    margin-top: 131px;
+}
+
+.my-skills-header{
+    display: flex;
+    width: 337px;
+    height: 103px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    /* Заголовки / 48 px, Medium */
+    font-family: Montserrat;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 60px; /* 125% */
+    letter-spacing: -1px;
+
+    margin-left: 60px;
+}
+
+.my-skills-photo{
+    margin-left: 1000px;
+    margin-top: -250px;
+}
+
+.nav{
+    display: inline-flex;
+    align-items: center;
+    gap: 41px;
+    margin-left: 370px;
+    margin-inline: 150px;
+}
+
+.nav-item{
+    color: var(--1, #2E363E);
+    text-decoration: none;
+    /* ����� / 14px, Medium */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+    transition: color 0.3s linear;
+}
+
+.nav-item:hover{
+    color:#BA68C8;
+}
+
+.send-btn{
+    margin-inline: 100px;
+    margin-top: 100px;
+}
+
+.send-button{
+    background-color: #BA68C8;
+    padding: 30px 50px;
+    color: #fff;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+
+    transition: background-color 0.3s linear;
+
+}
+
+.unity-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.unity-logos img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px; /* Добавьте отступы, если необходимо */
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+iframe {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.wanna-a-game{
+    color: var(--2, #434B53);
+
+    /* Текст / 21px, Medium */
+    font-family: Montserrat;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 143%; /* 30.03px */
+
+    margin-inline: auto;
+}
+
+.wanna-a-game-header{
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    /* Заголовки / 48 px, Medium */
+    font-family: Montserrat;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 60px; /* 125% */
+    letter-spacing: -1px;
+
+    display: flex;
+    width: 400px;
+    height: 103px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+
+    margin-top: 100px;
+    margin-inline: auto;
+}
+.wanna-a-game-input {
+    text-align: left; /* Выравниваем текст по центру */
+    top: 50%; /* Располагаем блок по вертикали на середине */
+    left: 30%; /* Располагаем блок чуть левее */
+    margin-left: 750px;
+    margin-top: 40px;
+    
+}
+
+/* Скрываем все поля ввода по умолчанию */
+.wanna-a-game-input input,
+.wanna-a-game-input textarea {
+    display: none;
+}
+
+/* Скрываем надписи на кнопках и показываем их при фокусе */
+.wanna-a-game-input label {
+    display: block;
+    cursor: pointer;
+}
+
+/* Показываем поле ввода, когда соответствующая кнопка активирована */
+#nameInput:checked ~ .wanna-a-game-input input#nameInput,
+#emailInput:checked ~ .wanna-a-game-input input#emailInput,
+#messageInput:checked ~ .wanna-a-game-input textarea#messageInput {
+    display: block;
+}

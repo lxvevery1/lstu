@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.header-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем дочерние элементы по горизонтали */
+    margin: auto; /* Центрируем .header-buttons внутри хедера */
+}
+
+.header-buttons button {
+    margin: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.login-button,
+.register-button {
+    border: none; /* Убираем обводку */
+    padding: 10px 20px; /* Увеличиваем внутренние отступы для создания больших кнопок */
+    font-size: 1em; /* Увеличиваем размер шрифта */
+    background-color: transparent; /* Цвет фона для кнопок "Войти" и "Регистрация" */
+    color: black; /* Цвет текста */
+    cursor: pointer;
+    border-radius: 10px; /* Задаем радиус скругления углов */
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desserts-of-the-month {
+    text-align: center;
+    margin: auto; /* Уменьшаем расстояние сверху и снизу */
+}
+
+.desserts-of-the-month h2 {
+    color: #4CAF50; /* Зеленый цвет для "Продукция месяца" */
+    margin: 0; /* Убираем внешние отступы */
+}
+
+.desserts-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Добавляем обертывание для множества элементов в одном ряду */
+}
+
+.item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 220px; /* Фиксированная ширина контейнера для каждого элемента */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2%;
+}
+
+.item img {
+    max-width: 100%;
+    max-height: 100%; /* Задаем фиксированную высоту для изображения */
+    height: 165px;
+    object-fit: cover; /* Сохраняем аспектное соотношение изображения */
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.item h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.item h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.item p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    align-items: left; /* Выравнивание по левому краю */
+    text-align: left;
+    font-size: small;
+}
+
+.item .details-button {
+    background-color: transparent;
+    color: black;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.8em;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: auto; /* Размещаем кнопку внизу контейнера */
+    align-self: flex-start; /* Выравниваем кнопку слева */
+}
+
+.search-button {
+    border: none; /* Убираем обводку */
+    background: none; /* Убираем фон (если есть) */
+    padding: 0; /* Убираем внутренние отступы */
+    cursor: pointer;
+}
+
+.content-top {
+    display: flex;
+    align-items: center; /* Выравнивание элементов по вертикали */
+}
+
+.content-top-left{
+    text-align: left;
+}
+
+.filter {
+    align-self: flex-start;
+    margin-left: 240px;
+}
+
+#filter {
+    padding: 8px 12px; /* Добавляем внутренний отступ */
+    background-color: transparent; /* Цвет фона */
+    color: black; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Делаем курсор указателем при наведении */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+
+.tea {
+    background-color: #d1f5d3; /* Уникальный цвет для чая */
+}
+
+.coffee {
+    background-color: #f5d3d3; /* Уникальный цвет для кофе */
+}
+
+.tea-details-button{
+    align-self: flex-start;
+}
+.coffee-details-button{
+    align-self: flex-start;
+}
+.tea-details-button:hover{
+    background-color: #a3f8a7; /* Цвет фона при наведении */
+}
+.coffee-details-button:hover {
+    background-color: #f49c9c;
+}
+
+.login-menu-container {
+    position: relative;
+}
+
+.login-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.login-button, .register-button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: border 0.3s ease; /* Плавное изменение стиля границы при наведении */
+}
+
+.login-menu input,
+.login-menu button,
+.login-menu a {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.login-menu button {
+    background-color: #2ecc71;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-menu button:hover {
+    background-color: #27ae60;
+}

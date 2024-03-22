@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import minimize
+
+# Заданная функция
+def f(x):
+    return x * np.sqrt(1 - x**2)
+
+# Интервал
+x_interval = np.linspace(-1, 1, 1000)
+
+# Начальные приближения для минимума и максимума
+min_x0 = -0.5
+max_x0 = 0.5
+
+# Функция для вывода значений на каждой итерации
+def print_iteration_result(xk):
+    global iteration
+    print(f"Iteration {iteration}: x = {xk}")
+    iteration += 1
+
+# Нахождение минимума функции
+iteration = 0
+min_result = minimize(lambda x: -f(x), x0=min_x0, bounds=[(-1, 1)], callback=print_iteration_result)
+min_x = min_result.x[0]
+min_value = f(min_x)
+
+# Нахождение максимума функции
+iteration = 0
+max_result = minimize(lambda x: f(x), x0=max_x0, bounds=[(-1, 1)], callback=print_iteration_result)
+max_x = max_result.x[0]
+max_value = f(max_x)
+
+print("\nМинимум функции:", min_value)
+print("Максимум функции:", max_value)
+
+# Построение графика функции
+y_values = f(x_interval)
+plt.plot(x_interval, y_values, label='y = x * sqrt(1 - x^2)')
+plt.scatter([min_x, max_x], [min_value, max_value], color='red', marker='o', label='Экстремумы')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()

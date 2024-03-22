@@ -1,0 +1,141 @@
+import copy
+from math import sqrt
+
+
+def nelder_mead(f, x_start,
+                step=0.5, no_improve_thr=1e-2,
+                no_improv_break=50, max_iter=0,
+                alpha=1., gamma=1., beta=1., _lambda=1.):
+    # init
+    dim = len(x_start)
+    prev_best = f(x_start)
+    not_improved = 0
+    res = [[x_start, prev_best]]
+
+    for point in range(dim):
+        x1 = copy.copy(x_start)
+        x1[point] = x1[point] + step
+        score_x1 = f(x1)
+        res.append([x1, score_x1])
+
+    # simplex iter
+    iters = 0
+    refl_number = 0
+    while True:
+        # =====Сортировка=====
+        res.sort(key=lambda x: x[1])  # Лучшая точка (минимум) будет в начале списка.
+        best = res[0][1]  # Текущее лучшее значение целевой функции
+
+        # ======Проверка на максимальное кол-во итераций======
+        if max_iter and iters >= max_iter:
+            return res[0]
+        iters += 1  # Увеличиваем счетчик итераций.
+
+        # ======Вывод в консоль результатов=====
+        print(f'\n==============================[{iters}]==============================')
+        print(f'Лучшее значение среди всех минимумов на итерации [{iters}]: f(x) = {best:.6f}')
+        print("Симплекс:")
+        for i, point in enumerate(res):
+            point_label = 'xh' if i == len(res) - 1 else 'xg' if i == len(
+                res) - 2 else 'xl' if i == 0 else f'Точка {i + 1}'
+            print(f'{point_label}: {[f"{coord:.6f}" for coord in point[0]]}  {point[1]:.6f}')
+        print(f"Число отражений: {refl_number}")
+        print(f"------------------------------Точки------------------------------")
+
+        prev_best = best  # Обновляем предыдущее лучшее значение
+
+        if best < prev_best - no_improve_thr:
+            # произошло улучшение
+            not_improved = 0
+            prev_best = best
+        else:
+            # улучшение не произошло
+            not_improved += 1
+
+        if not_improved >= no_improv_break:
+            # возвращаем текущий лучший результат
+            return res[0]
+
+        # =====Центроид=====
+        x0 = [0.] * dim  # Инициализация координат центроида
+        # Вычисление суммы координат точек, за исключением худшей точки
+        for tup in res[:-1]:
+            for i, c in enumerate(tup[0]):
+                x0[i] += c / (len(res) - 1)
+
+        print(f"Центр тяжести: {[f'{coord:.6f}' for coord in x0]}")
+
+        # =====Отражение=====
+        xr = x0 + alpha * (x0 - res[-1][0])  # Вычисление отраженной точки
+        rscore = f(xr)  # Оценка значения целевой функции в отраженной точке
+        print(f"Отражение: {[f'{coord:.6f}' for coord in xr]}")
+        if res[0][1] <= rscore < res[-2][1]:  # Проверка условия отражения
+            print(f"(xl = {res[0][1]:.6f}) <= (f(x0 + alpha*(x0 - xh)) = {rscore:.6f}) "
+                  f"<= (xg = {res[-2][1]:.6f}) -> условие отражения выполнено")
+            refl_number += 1  # Подсчет числа отражений
+            # Замена худшей точки отраженной точкой
+            del res[-1]
+            res.append([xr, rscore])
+            print(f"На этой итерации мы провели ОТРАЖЕНИЕ симплекса")
+            continue
+
+        # =====Растяжение=====
+        if rscore < res[0][1]:  # Проверка условия растяжения
+            print(f"{rscore:.6f} < {res[0][1]:.6f} => условие растяжения выполнено")
+            # Вычисление растяжения
+            xe = x0 + gamma * (x0 - res[-1][0])
+            escore = f(xe)
+            print("Проверка условия улучшения")
+            if escore < rscore:  # Проверка условия улучшения
+                # Замена худшей точки экспансией
+                print("Замена худшей точки растяженной точкой")
+                print(f"f(x0 + gamma*(x0 - xh)) = {escore:.6f} < {rscore:.6f}")
+                del res[-1]
+                res.append([xe, escore])
+                print(f"Растяжение: {[f'{coord:.6f}' for coord in xe]}")
+                print(f"На этой итерации мы провели РАСТЯЖЕНИЕ симплекса")
+                continue
+            else:
+                print(f"f(x0 + gamma*(x0 - xh)) = {escore:.6f} >= {rscore:.6f}")
+                print("Замена худшей точки отраженной точкой")
+                # В случае неулучшения замена худшей точки отраженной точкой
+                del res[-1]
+                res.append([xr, rscore])
+                print(f"На этой итерации мы провели ОТРАЖЕНИЕ симплекса")
+                continue
+
+        # =====Сжатие=====
+        xc = x0 + beta * (x0 - res[-1][0])  # Вычисление сжатия
+        cscore = f(xc)
+        print(f"Сжатие: {[f'{coord:.6f}' for coord in xc]}")
+        if cscore < res[-1][1]:  # Проверка условия сжатия
+            print(f"f(x0 + beta*(x0 - xh)) = {cscore:.6f} < {res[-1][-1]:.6f} -> выпонено условие сжатия")
+            # Замена худшей точки сжатием
+            del res[-1]
+            res.append([xc, cscore])
+            print(f"На этой итерации мы провели СЖАТИЕ симплекса")
+            continue
+
+        # =====Редукция=====
+        x1 = res[0][0]  # Запоминание координат лучшей точки
+        nres = []  # Инициализация нового списка для хранения новых точек симплекса
+        # Применение уменьшения симплекса к каждой точке
+        for tup in res:
+            redx = x1 + _lambda * (tup[0] - x1)
+            score = f(redx)
+            print(f"f(x1 + lambda*(xtup - x1)) = {score:.6f}")
+            nres.append([redx, score])
+        # Обновление списка точек симплекса
+        res = nres
+        print(f"На этой итерации мы провели РЕДУКЦИЮ симплекса\n")
+
+
+if __name__ == "__main__":
+    import numpy as np
+
+
+    def f(x):
+        return ((x[0] - 5) ** 2) / 2 + ((x[1] - 3) ** 2) / 3 + 4
+
+
+    print(f'\n\nИтоговый (лучший) результат:', '{Симплекс, Точка минимума}', nelder_mead(f, np.array([-2, 7])))

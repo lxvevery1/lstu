@@ -1,0 +1,204 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,600;1,600&family=Noto+Sans+Gujarati&family=Noto+Sans:wght@500&family=Oswald:wght@400;500;700&display=swap");
+
+header {
+  display: flex;
+  gap: 40px;
+  padding-top: 30px;
+  padding-left: 160px;
+  padding-bottom: 60px;
+}
+.title {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+footer {
+  display: flex;
+  height: 72px;
+  background-color: #ffffff;
+  padding-top: 300px;
+  align-items: center;
+}
+
+.footer_text {
+  display: flex;
+  padding-left: 166px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.card-list1 {
+  display: flex;
+  width: 200px;
+  gap: 95px;
+  padding-left: 163px;
+}
+
+.card-list2 {
+  padding-top: 60px;
+  padding-left: 163px;
+}
+
+.card-block {
+  width: 437px;
+  height: 200px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background: #fff;
+  display: flex;
+  gap: 42px;
+  padding-top: 46px;
+  padding-left: 35px;
+}
+
+.photo {
+  width: 133px;
+  height: 139px;
+  flex-shrink: 0;
+  background: url(/images/view-of-adorable-kitten-with-simple-background\ 1.svg),
+    lightgray 50% / cover no-repeat;
+}
+
+.main-text-top {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.main-text-bottom {
+  color: #918282;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 19px;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
+main {
+flex-direction: row;
+
+}
+
+
+
+.buttons, .black_butt, .white_butt {
+display: flex;
+flex-direction: row;
+font-size: 10px;
+text-align: center;
+padding-bottom: 40px;
+}
+
+
+.buttons{
+
+    gap: 10px;
+    padding-left: 163px;
+
+}
+.black_butt, .white_butt {
+
+    border-radius: 50px;
+
+}
+
+
+.black_butt {
+    color: white;
+    gap:10%;
+
+
+}
+
+
+
+
+.PDF {
+
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+
+.DOC {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.white_butt {
+
+    gap: 10%;
+}
+
+
+
+.XLS {
+
+    border: 2px solid black;
+
+
+}
+
+
+.PNG {
+
+    border: 2px solid black;
+
+
+}
+
+.close {
+
+    width: 18px;
+    height: 40px;
+    
+
+}
+
+.black_butt button {
+    width: 80px;
+    height: 45px;
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+
+}
+
+.white_butt button {
+    border-radius: 25px;
+    width: 80px;
+    height: 45px;
+    background-color: white;
+    color: black;
+
+
+}

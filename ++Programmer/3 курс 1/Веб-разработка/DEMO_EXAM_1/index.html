@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Магазин дессертов</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Dessert Shop Logo">
+            <h2>Магазин дессертов</h2>
+        </div>
+        <div class="header-buttons">
+            <button class="search-button"><img src="img/search.png" alt="search-img"></button>
+            <button class="register-button">Регистрация</button>
+            <div class="login-menu-container">
+                <button class="login-button" onclick="toggleLoginMenu()">Войти</button>
+                <div class="login-menu" id="loginMenu">
+                    <input type="text" placeholder="Телефон или email">
+                    <input type="password" placeholder="Пароль">
+                    <button onclick="login()">Войти</button>
+                    <a href="#" onclick="forgotPassword()">Забыли пароль?</a>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+    <div class="content">
+        <div class="desserts-of-the-month">
+            <div class="content-top">
+                
+            <div class="content-top-left">
+                <h2>Продукция месяца</h2>
+                <p>Популярные позиции сезона с дополнительной скидкой</p>
+            </div>
+            <div class="filter">
+                <select id="filter">
+                    <option value="all">Показывать всё</option>
+                    <option value="tea">Чай</option>
+                    <option value="coffee">Кофе</option>
+                </select>
+            </div>
+        </div>
+            <div id="desserts-container" class="desserts-container"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

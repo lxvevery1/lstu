@@ -1,0 +1,62 @@
+model small
+data_in segment
+    input db 83
+data_in ends
+data_out segment
+    res1 db 0
+    res2 db 0
+data_out ends
+stack segment
+    dw 100 dup(0) ; Stack definition
+stack ends
+code segment
+    assume DS:data_out, ES:data_in, CS:code, SS:stack
+
+near_conversion proc
+    mov ax, data_in
+    mov es, ax
+    mov ax, data_out
+    mov ds, ax
+
+    ; Push input value onto the stack
+    mov al, input
+    push ax
+
+    xor ah, ah
+    mov bl, 10
+    div bl
+    mov res2, ah ; Store the high nibble in res2
+    mov res1, al ; Store the low nibble in res1
+
+    pop ax ; Pop the input value from the stack into ax
+    ret ; Return from subroutine
+near_conversion endp
+
+far_conversion proc far
+
+    mov ax, data_out
+    mov ds, ax
+    mov al, res1 ; Load the low nibble of res1 into al
+    mov ah, res2 ; Load the high nibble of res2 into ah
+    shl al, 4 ; Shift the high nibble to the upper 4 bits
+    add al, ah ; Combine the high and low nibbles
+    mov res2, al ; Store the result in res2 as a byte
+
+    retf ; Return from far subroutine
+far_conversion endp
+
+start:
+    mov ax, stack
+    mov ss, ax ; Stack initialization
+
+    call near_conversion
+
+    call far_conversion
+
+    ; Now res2 contains the final result
+
+    mov ah, 4Ch
+    int 21h
+
+code ends
+end start

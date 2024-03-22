@@ -1,0 +1,114 @@
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
+from pprint import pprint
+
+import matplotlib.pyplot as plt 
+import numpy as np
+
+f = lambda x, y, z: (x-2)**2+(y-5)**2+(z+2)**4
+start_point = (4, -2, 3)
+alpha = 2
+beta = 0.5
+gamma = 2
+lambd = 2
+n=3
+
+def get_h_g_l(points, func):
+ points = sorted(enumerate(points), key=lambda x: func(*x[1]))
+ return points[-1][0], points[-2][0], points[0][0]
+
+def get_tetr_in(point):
+ b_1 = (np.sqrt(n+1)+n-1)/(n*np.sqrt(2))*lambd
+ b_2 = (np.sqrt(n+1)-1)/(n*np.sqrt(2))*lambd
+ points = [point,]
+ for i in range(1, n + 1):
+    cur_point = [0] * n
+    for j in range(n):
+        if j == i - 1:
+            cur_point[j] = point[j] + b_1
+        else:
+            cur_point[j] = point[j] + b_2
+    points.append(cur_point)
+ return points
+
+def make_data():
+ x = np.arange(-2, 9, 0.3)
+ y = np.arange(-3, 8, 0.3)
+ z = np.arange(-8, 3, 0.3)
+ xgrid, ygrid, zgrid = np.meshgrid(x, y, z)
+ z = np.log(f(xgrid, ygrid, zgrid))
+ return xgrid, ygrid, zgrid
+
+def diff_sqad(els):
+ return (els[0] - els[1])**2
+
+if __name__=="__main__":
+ X, Y, Z = make_data()
+ U = f(X,Y,Z)
+ color_map = plt.get_cmap('nipy_spectral')
+ plt.ion()
+ fig = plt.figure()
+ ax = fig.add_subplot(111, projection="3d")
+ verts = get_tetr_in(start_point)
+ print("Точки тетраэдра:")
+ pprint(verts)
+ for iter in range(1000):
+    print("Итерация", iter+1)
+    faces = [[0, 2, 3], [0, 1, 2], [1, 2, 3], [0, 1, 3]]
+    poly3d = [[verts[vert_id] for vert_id in face] for face in faces]
+    x, y, z = zip(*verts)
+    ax.scatter(x, y, z)
+    collection = Poly3DCollection(poly3d, edgecolors= 'r', facecolor= [0.5, 0.5, 1], linewidths=1, alpha=0.3)
+    ax.add_collection3d(collection)
+
+    scatter_plot = ax.scatter(X, Y, Z, c=U, s=30, alpha=0.1, marker='.', cmap=color_map)
+
+    fig.canvas.draw()
+    fig.canvas.flush_events()
+    ax.clear()
+
+    #*******************
+    h, g, l = get_h_g_l(verts, f)
+    o = [ 0, 0, 0 ]
+    #*******************
+    for j in range(4):
+        if j == h:
+            continue
+        o = list(map(sum, zip(o, verts[j])))
+    o = [i/3 for i in o]
+    #*******************
+    if alpha > 0:
+        r = [(1+alpha)*o[i]-alpha*verts[h][i] for i in range(3)]
+    else:
+        break
+ #*******************
+    if f(*r) < f(*verts[l]):
+        e = [gamma*r[i]+(1-gamma)*o[i] for i in range(3)]
+        if f(*e) < f(*verts[l]):
+            verts[h] = e
+            print("Растяжение")
+        else:
+            verts[h] = r
+            print("Отражение")
+    elif f(*verts[g]) < f(*r) <= f(*verts[h]):
+        c = [beta*verts[h][i]+(1-beta)*o[i] for i in range(3)]
+        verts[h] = c
+        print(iter, "Сжатие")
+    elif f(*verts[l]) < f(*r) <= f(*verts[g]):
+        verts[h] = r
+        print("Отражение")
+    elif f(*r) > f(*verts[h]):
+        for j in range(4):
+            if j == l:
+                continue
+            verts[j] = [verts[l][i]+0.5*(verts[j][i]-verts[l][i]) for i in range(3)]
+        print("Редукция")
+    print("Точки тетраэдра:")
+    pprint(verts)
+    #*******************
+    sigma = np.sqrt(1/(n+1)*sum([(f(*x_j)-1/(n+1)*sum([f(*vert) for vert in verts]))**2 for x_j in verts]))
+    print("Sigma:", sigma)
+    if sigma < 0.001:
+        print("Точка найдена!!!!")
+        print("Найденная точка:", verts[l])
+        print("Значение функции в этой точке:", f(*verts[l]))
+        break

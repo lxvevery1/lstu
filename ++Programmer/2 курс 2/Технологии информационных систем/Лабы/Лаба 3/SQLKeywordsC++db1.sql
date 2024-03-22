@@ -1,0 +1,1 @@
+SELECT * FROM `keywords c++`.`ключевое слово`;

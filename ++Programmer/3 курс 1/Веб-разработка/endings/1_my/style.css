@@ -1,0 +1,36 @@
+body{
+    margin: 0 auto; 
+    width: 1200px;
+}
+
+header{
+    background-color: rgb(75, 75, 75);
+    padding: 15px;
+}
+
+ul.menu li{
+    display: inline;
+}
+
+ul.menu li a{
+    text-decoration: none;
+    font-size: 30px;
+    padding: 10px;
+    color: rgb(221, 221, 221);
+}
+
+/* ------------------------------ */
+
+.content{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 30px;
+}
+
+.block1{
+    font-size: 15px;
+}
+
+img.block1{
+    padding: 10px;
+}

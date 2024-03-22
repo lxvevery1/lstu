@@ -1,0 +1,281 @@
+#include <iostream>
+#include <iomanip>
+#define n 5
+using namespace std;
+
+void matrPow(double An[n][n], double Ak[n][n], int t) {
+	double temp[n][n];
+
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			temp[i][j] = Ak[i][j];
+		}
+	}
+	while (t > 1) {
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				An[i][j] = 0;
+				for (int k = 0; k < n; k++)
+					An[i][j] += temp[i][k] * Ak[k][j];
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				temp[i][j] = An[i][j];
+			}
+		}
+		t--;
+	}
+}
+
+void matr2DDisplay(double An[n][n]) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << setw(10) << An[i][j];
+		}
+		cout << "\n";
+	}
+}
+
+double diagonalSum(double Sn, double An[n][n]) {
+	for (int i = 0; i < n; i++) {
+		Sn += An[i][i];
+	}
+	return Sn;
+}
+
+void calcA(double B1[n][n], double B2[n][n], double P, double res[n][n]) {
+	double unit[n][n], Brackets[n][n];
+
+	for (int i = 0; i < n; i++) { // Calculating identity matrix
+		for (int j = 0; j < n; j++) {
+			unit[i][j] = 0;
+
+			if (i == j)
+				unit[i][j] = 1;
+		}
+	}
+
+	// Brackets open
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			Brackets[i][j] = B2[i][j] - (P * unit[i][j]);
+		}
+	}
+	// Brackets close
+	
+	// Multiply
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			res[i][j] = 0;
+			for (int k = 0; k < n; k++)
+				res[i][j] += B1[i][k] * Brackets[k][j];
+		}
+	}
+}
+void calcB(double Ak[n][n], double Pk, double E[n][n], double Bk[n][n]) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			Bk[i][j] = Ak[i][j] - Pk * E[i][j];
+		}
+	}
+}
+
+void calcAinv(double Bn[n][n], double Pk, double Pn, double res[n][n]) {
+	double unit[n][n], Brackets[n][n];
+
+	for (int i = 0; i < n; i++) { // Calculating identity matrix
+		for (int j = 0; j < n; j++) {
+			unit[i][j] = 0;
+
+			if (i == j)
+				unit[i][j] = 1;
+		}
+	}
+
+	// Brackets open
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			Brackets[i][j] = Bn[i][j] - (Pn * unit[i][j]);
+		}
+	}
+
+	matr2DDisplay(Brackets);
+	// Brackets close
+
+	// Multiply
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			res[i][j] = 0;
+			res[i][j] += (1/Pk) * (Brackets[i][j]);
+		}
+	}
+}
+/*
+void calcEigVect(double B1[n][n], double B2[n][n], double B3[n][n], double B4[n][n], double E[n][n], double x[n], double res[n][n], int k) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			res[i][j] = pow(x[k],n-1) * E[i][j] + pow(x[k], n-2) * B1[i][j] + pow(x[k], n-3) * B2[i][j] + pow(x[k],n-4) * B3[i][j] + pow(x[k],n-5) * B4[i][j];
+		}
+	}
+}*/
+void calcEigVect(double B1[n][n], double B2[n][n], double B3[n][n], double B4[n][n], double E[n][n], double x[n], double res[n][n], int k) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			res[i][j] = (pow(x[k], n - 1) * E[i][j]) 
+				+ (pow(x[k], n - 2) * B1[i][j]) 
+				+ (pow(x[k], n - 3) * B2[i][j]) 
+				+ (pow(x[k], n - 4) * B3[i][j]) 
+				+ (pow(x[k], n - 5) * B4[i][j]);
+		}
+	}
+}
+int main()
+{
+	cout << setprecision(2) << fixed;
+	double A1[n][n], A2[n][n], A3[n][n], A4[n][n], A5[n][n], B1[n][n], B2[n][n], B3[n][n], B4[n][n], B5[n][n], Ainv[n][n], E[n][n], R1[n][n], R2[n][n], R3[n][n], R4[n][n], R5[n][n],
+		Tr1 = 0, Tr2 = 0, Tr3 = 0, Tr4 = 0, Tr5 = 0,
+		P1 = 0, P2 = 0, P3 = 0, P4 = 0, P5 = 0;
+	
+	/*double A[n][n] = {{0.369080808,	1.436031013, -0.728668525,	0.990262713, -1.066533038},
+						{9.321890071, -1.513583362, -3.530025844, -5.518609715,	1.735434769,},
+						{0.53279339, -2.264422783, -4.01783643, -5.59560245, -3.516869824, },
+						{1.624855009,	1.624346269, -2.438991881,	2.43852384,	2.741387029,},
+						{-7.857573106, -1.199934881, -0.823975906,	0.389003073, -6.276184856} };*/
+	double A[n][n] = {{4.935279658,	11.22995589,	7.490992356,	9.252651783,	3.132774354},
+	{				   1.98774287, -4.155200862,	1.78913695, -0.601474896, -4.903054181 },
+	{				   -14.85166852, -14.99269286, -17.98117655, -6.935448025,	3.670202377},
+	{				   3.110179479, 1.867629727, 1.115230495, -3.164764118, 3.172509008},
+	{				   -0.635350372, -2.132774354, -1.226824258, 1.39387817, -2.634138128}
+	};
+	
+	/*
+	double A[n][n] = { { 5, 6, 3},
+		{-1, 0, 1},
+		{1, 2, -1} };
+		*/
+	// Displaying A
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			A1[i][j] = A[i][j];
+			R1[i][j] = 0.0;
+			R2[i][j] = 0.0;
+			R3[i][j] = 0.0;
+			R4[i][j] = 0.0;
+			R5[i][j] = 0.0;
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			E[i][j] = 0.0;
+			E[i][i] = 1;
+		}
+	}
+
+	//Calculatin Pn
+	cout << "A1: \n"; matr2DDisplay(A1);
+	P1 = diagonalSum(Tr1, A1);
+	calcB(A1, P1, E, B1);
+	cout << "B1: \n"; matr2DDisplay(B1);
+
+	calcA(A1, A1, P1, A2);
+	cout << "A2: \n"; matr2DDisplay(A2);
+	P2 = 0.5 * diagonalSum(Tr2, A2);
+	calcB(A2, P2, E, B2);
+	cout << "B2: \n"; matr2DDisplay(B2);
+
+	calcA(A1, A2, P2, A3);
+	cout << "A3: \n"; matr2DDisplay(A3);
+	P3 = (1/3.) * diagonalSum(Tr3, A3);
+	calcB(A3, P3, E, B3);
+	cout << "B3: \n"; matr2DDisplay(B3);
+
+	calcA(A1, A3, P3, A4);
+	cout << "A4: \n"; matr2DDisplay(A4);
+	P4 = 0.25 * diagonalSum(Tr4, A4);
+	calcB(A4, P4, E, B4);
+	cout << "B4: \n"; matr2DDisplay(B4);
+
+	calcA(A1, A4, P4, A5);
+	cout << "A5: \n"; matr2DDisplay(A5);
+	P5 = 0.2 * diagonalSum(Tr5, A5);
+	calcB(A5, P5, E, B5);
+	cout << "B5: \n"; matr2DDisplay(B5);
+
+	//calcB(B1, B3, P3, B4);
+	//cout << "B4: \n"; matr2DDisplay(B4);
+	//P4 = 0.25 * diagonalSum(Tr4, B4);
+
+	//calcB(B1, B4, P4, B5);
+	//cout << "B5: \n"; matr2DDisplay(B5);
+	//P5 = 0.2 * diagonalSum(Tr5, B5);
+
+	//Displaying P
+	cout << "\nP_1: " << P1 << "\n";
+	cout << "P_2: " << P2 << "\n";
+	cout << "P_3: " << P3 << "\n";
+	cout << "P_4: " << P4 << "\n";
+	cout << "P_5: " << P5 << "\n\n";
+
+	/*
+	// Calculating the inverse matrix A^(-1)
+	calcAinv(A1, P2, P2, Ainv);
+	
+	cout << "Ainv: \n";
+	matr2DDisplay(Ainv);
+
+	cout << "PROOF: AA^(-1) = E\n";
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			E[i][j] = 0;
+			for (int k = 0; k < n; k++)
+				E[i][j] += A1[i][k] * Ainv[k][j];
+		}
+	}
+	*/
+	// [WA] D(A) = ((-1)^5)*(x^5-(-9)*x^4-(29*x^3)-(246.51*x^2)-(-465.60*x)-(-612.8625))
+
+	// => x = {-8.05768, -6.96634, -0.925153, 2.95372, 3.99545)
+	// 8.797981808 & 1.436031013 & -0.728668525 & 0.990262713 & -1.066533038 \
+	   9.321890071 & 7.914316638 & -3.530025844 & -5.518609715 & 1.735434769 \
+       0.53279339 & -2.264422783 & 3.41006357 & -5.59560245 & -3.516869824 \
+       1.624855009 & 1.624346269 & -2.438991881 & 10.86642384 & 2.741387029 \
+       -7.857573106 & -1.199934881 & -0.823975906 & 0.389003073 & 2.150715144
+	//double x[5] = { -2, 2, 4 };
+	//double x[5] = { -8.05768, -6.96634, -0.925153, 2.95372, 3.99545 };
+
+	double x[5] = { -9.0, -8.0, -7.0, -2.0, 3.0 };
+
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			E[i][j] = 0.0;
+			E[i][i] = 1;
+		}
+	}
+
+	cout << "E: \n";
+	matr2DDisplay(E);
+
+	calcEigVect(B1, B2, B3, B4, E, x, R1, 0);
+	calcEigVect(B1, B2, B3, B4, E, x, R2, 1);
+	calcEigVect(B1, B2, B3, B4, E, x, R3, 2);
+	calcEigVect(B1, B2, B3, B4, E, x, R4, 3);
+	calcEigVect(B1, B2, B3, B4, E, x, R5, 4);
+
+	cout << "Eigen vector matrix R1:\n";
+	matr2DDisplay(R1);
+	cout << "Eigen vector matrix R2:\n";
+	matr2DDisplay(R2);
+	cout << "Eigen vector matrix R3:\n";
+	matr2DDisplay(R3);
+	cout << "Eigen vector matrix R4:\n";
+	matr2DDisplay(R4);
+	cout << "Eigen vector matrix R5:\n";
+	matr2DDisplay(R5);
+
+	return 0;
+}
